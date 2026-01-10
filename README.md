@@ -3,7 +3,7 @@
 
 # Usage
 
-1. [Install]() that plugin into Android Studio or IDEA by JetBrains
+1. [Install](https://github.com/Tanexc/ComposableGenerationPlugin/releases/tag/1.0) that plugin into Android Studio or IDEA by JetBrains
 2. Click New -> Composable Function
 <img width="493" height="417" alt="image" src="https://github.com/user-attachments/assets/18a0c03d-0693-4376-a383-3c755c9e34a0" />
 
