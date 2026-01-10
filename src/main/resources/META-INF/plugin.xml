@@ -1,0 +1,26 @@
+<idea-plugin>
+    <id>com.tanexc.ComposableGeneration</id>
+    <name>ComposableGeneration</name>
+    <vendor url="https://github.com/tanexc">Tanexc</vendor>
+
+    <description><![CDATA[
+        Allows you to create composable functions faster!
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.kotlin</depends>
+
+    <actions>
+        <action id="CreateSimpleComposable"
+                class="com.tanexc.composablegeneration.CreateComposableAction"
+                text="Composable Function"
+                description="Create a new Composable function with the same file name">
+            <add-to-group group-id="NewGroup" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt C"/>
+        </action>
+    </actions>
+
+    <extensions defaultExtensionNs="org.jetbrains.kotlin">
+        <supportsKotlinPluginMode supportsK2="true" />
+    </extensions>
+</idea-plugin>
