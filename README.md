@@ -1,4 +1,4 @@
-# 🖼️ ComposableGenerationPlugin
+# ComposableGenerationPlugin
 <p align="center">Plugin that provides the ability to generate Composable functions with preview</p>
 
 # Usage
