@@ -3,15 +3,15 @@ package com.tanexc.composablegeneration
 import com.intellij.ide.actions.CreateFileFromTemplateAction
 import com.intellij.ide.actions.CreateFileFromTemplateDialog
 import com.intellij.ide.fileTemplates.FileTemplate
+import com.intellij.lang.Language
+import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.util.IconLoader
+import com.intellij.psi.JavaDirectoryService
 import com.intellij.psi.PsiDirectory
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiFileFactory
-import com.intellij.openapi.command.WriteCommandAction
-import com.intellij.openapi.roots.ProjectRootManager
 import javax.swing.Icon
-import com.intellij.openapi.util.IconLoader
-import com.intellij.lang.Language
 
 class CreateComposableAction : CreateFileFromTemplateAction(
     "Composable Function",
@@ -25,65 +25,51 @@ class CreateComposableAction : CreateFileFromTemplateAction(
     ) {
         builder
             .setTitle("Create Composable Function")
-            .addKind("Composable Function", ComposableIcons.COMPOSABLE, "Composable.kt")
+            .addKind("Composable", ComposableIcons.COMPOSABLE, "Composable.kt")
+            .addKind("Composable + Preview", ComposableIcons.COMPOSABLE, "ComposableWithPreview.kt")
     }
 
-    override fun createFileFromTemplate(name: String, template: FileTemplate, dir: PsiDirectory): PsiFile {
-        val fileName = if (name.endsWith(".kt")) name else "$name.kt"
-        val functionName = fileName.removeSuffix(".kt")
-
-        val packageName = getPackageName(dir)
-        val fileContent = createComposableContent(packageName, functionName)
+    override fun createFileFromTemplate(
+        name: String,
+        template: FileTemplate,
+        dir: PsiDirectory
+    ): PsiFile {
+        val functionName = name.removeKtSuffix()
+        val fileName = "$functionName.kt"
+        val fileContent = createComposableContent(
+            packageName = getPackageName(dir),
+            functionName = functionName,
+            includePreview = template.name.removeSuffix(".kt") == PREVIEW_TEMPLATE_NAME
+        )
 
         return WriteCommandAction.writeCommandAction(dir.project).compute<PsiFile, Throwable> {
-            val psiFile = PsiFileFactory
-                .getInstance(dir.project)
-                .createFileFromText(fileName, Language.findLanguageByID("kotlin")!!, fileContent)
+            val kotlinLanguage = checkNotNull(Language.findLanguageByID("kotlin")) {
+                "The Kotlin plugin is required to create a composable function"
+            }
+            val psiFile = PsiFileFactory.getInstance(dir.project)
+                .createFileFromText(fileName, kotlinLanguage, fileContent)
 
             dir.add(psiFile) as PsiFile
         }
     }
 
-    private fun createComposableContent(packageName: String, functionName: String): String {
-        return buildString {
-            if (packageName.isNotEmpty()) {
-                appendLine("package $packageName")
-                appendLine()
-            }
-
-            appendLine("import androidx.compose.runtime.Composable")
-            appendLine("import androidx.compose.ui.tooling.preview.Preview")
-            appendLine()
-
-            appendLine("@Composable")
-            appendLine("fun $functionName() {")
-            appendLine("    // TODO: Add your composable content here")
-            appendLine("}")
-            appendLine()
-
-            appendLine("@Preview")
-            appendLine("@Composable")
-            appendLine("fun ${functionName}Preview() {")
-            appendLine("    $functionName()")
-            appendLine("}")
-        }
-    }
-
-    private fun getPackageName(dir: PsiDirectory): String {
-        return try {
-            ProjectRootManager
-                .getInstance(dir.project)
-                .fileIndex
-                .getPackageNameByDirectory(dir.virtualFile) ?: ""
-        } catch (e: Exception) {
-            ""
-        }
-    }
+    private fun getPackageName(directory: PsiDirectory): String =
+        JavaDirectoryService.getInstance()
+            .getPackage(directory)
+            ?.qualifiedName
+            .orEmpty()
 
     override fun getActionName(directory: PsiDirectory, newName: String, templateName: String): String {
         return "Create Composable Function"
     }
+
+    private companion object {
+        const val PREVIEW_TEMPLATE_NAME = "ComposableWithPreview"
+    }
 }
+
+private fun String.removeKtSuffix(): String =
+    if (endsWith(".kt", ignoreCase = true)) dropLast(3) else this
 
 object ComposableIcons {
     val COMPOSABLE: Icon = IconLoader.getIcon("/icons/compose.svg", CreateComposableAction::class.java)

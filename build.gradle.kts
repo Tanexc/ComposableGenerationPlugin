@@ -1,11 +1,13 @@
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
+
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "2.3.0"
-    id("org.jetbrains.intellij.platform") version "2.10.2"
+    id("org.jetbrains.intellij.platform") version "2.18.1"
 }
 
 group = "com.tanexc"
-version = "1.0"
+version = "1.1.0"
 
 repositories {
     mavenCentral()
@@ -16,29 +18,32 @@ repositories {
 
 dependencies {
     intellijPlatform {
-        intellijIdea("2025.2.4")
-        testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
+        intellijIdea("2024.3.6")
 
         bundledPlugin("com.intellij.java")
         bundledPlugin("org.jetbrains.kotlin")
         bundledPlugin("org.intellij.plugins.markdown")
     }
-
-    implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:2.3.0")
 }
 
 intellijPlatform {
     pluginConfiguration {
         ideaVersion {
-            sinceBuild = "252.25557"
+            sinceBuild = "243"
         }
-
-        changeNotes = """
-            Initial version
-        """.trimIndent()
     }
 
     instrumentCode = false
+
+    pluginVerification {
+        ides {
+            create(IntelliJPlatformType.AndroidStudio, "2024.3.1.13")
+            create(IntelliJPlatformType.AndroidStudio, "2025.1.2.13")
+            create(IntelliJPlatformType.AndroidStudio, "2025.2.2.8")
+            create(IntelliJPlatformType.AndroidStudio, "2025.3.4.7")
+            create(IntelliJPlatformType.AndroidStudio, "2026.1.2.10")
+        }
+    }
 
 }
 

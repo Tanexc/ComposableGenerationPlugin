@@ -1,5 +1,5 @@
 # ComposableGenerationPlugin
-<p align="center">Plugin that provides the ability to generate Composable functions with preview</p>
+<p align="center">Plugin that provides the ability to generate Composable functions</p>
 
 # Usage
 
@@ -7,7 +7,7 @@
 2. Click New -> Composable Function
 <img width="493" height="417" alt="image" src="https://github.com/user-attachments/assets/18a0c03d-0693-4376-a383-3c755c9e34a0" />
 
-4. Enter name of your function and create it
+3. Enter the function name and choose either <b>Composable Function</b> or <b>Composable Function with Preview</b>
 <img width="352" height="84" alt="image" src="https://github.com/user-attachments/assets/40dbd881-b027-48aa-bd72-df67474562e9" />
 
 
