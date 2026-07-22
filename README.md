@@ -5,7 +5,8 @@
 
 1. [Install](https://github.com/Tanexc/ComposableGenerationPlugin/releases/tag/1.1.0) that plugin into Android Studio or IDEA by JetBrains
 2. Click New -> Composable Function
-<img width="493" height="417" alt="image" src="https://github.com/user-attachments/assets/18a0c03d-0693-4376-a383-3c755c9e34a0" />
+<img width="512" height="217" alt="image" src="https://github.com/user-attachments/assets/fbb34875-c4a6-479e-b463-e64480eee183" />
+
 
 3. Enter the function name and choose either <b>Composable</b> or <b>Composable + Preview</b>
 
