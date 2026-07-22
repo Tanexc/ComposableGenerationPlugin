@@ -3,12 +3,14 @@
 
 # Usage
 
-1. [Install](https://github.com/Tanexc/ComposableGenerationPlugin/releases/tag/1.0) that plugin into Android Studio or IDEA by JetBrains
+1. [Install](https://github.com/Tanexc/ComposableGenerationPlugin/releases/tag/1.1.0) that plugin into Android Studio or IDEA by JetBrains
 2. Click New -> Composable Function
 <img width="493" height="417" alt="image" src="https://github.com/user-attachments/assets/18a0c03d-0693-4376-a383-3c755c9e34a0" />
 
 3. Enter the function name and choose either <b>Composable Function</b> or <b>Composable Function with Preview</b>
-<img width="352" height="84" alt="image" src="https://github.com/user-attachments/assets/40dbd881-b027-48aa-bd72-df67474562e9" />
+
+<img width="344" height="135" alt="image" src="https://github.com/user-attachments/assets/9403859b-e10e-4601-98d7-2393c79a66f5" />
+
 
 
 That's it
