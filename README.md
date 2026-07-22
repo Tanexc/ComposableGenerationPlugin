@@ -7,9 +7,10 @@
 2. Click New -> Composable Function
 <img width="493" height="417" alt="image" src="https://github.com/user-attachments/assets/18a0c03d-0693-4376-a383-3c755c9e34a0" />
 
-3. Enter the function name and choose either <b>Composable Function</b> or <b>Composable Function with Preview</b>
+3. Enter the function name and choose either <b>Composable</b> or <b>Composable + Preview</b>
 
-<img width="344" height="135" alt="image" src="https://github.com/user-attachments/assets/9403859b-e10e-4601-98d7-2393c79a66f5" />
+<img width="345" height="134" alt="image" src="https://github.com/user-attachments/assets/480ff4a1-d77d-47e9-900e-a7af7bc35e8f" />
+
 
 
 
